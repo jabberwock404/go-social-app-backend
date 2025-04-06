@@ -3,15 +3,19 @@ package main
 import (
 	"log"
 	"social/internal/env"
+	"social/internal/storage"
 )
 
 func main() {
 	cfg := config{
-		addr: env.GetString("ADDR", ":8081"),
+		addr: env.GetString("ADDR", ":8080"),
 	}
 
+	storage := storage.NewPostgresStorage(nil)
+
 	app := &application{
-		config: cfg,
+		config:  cfg,
+		storage: storage,
 	}
 
 	mux := app.mount()

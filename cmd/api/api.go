@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"social/internal/storage"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -14,7 +15,8 @@ type config struct {
 }
 
 type application struct {
-	config config
+	config  config
+	storage storage.Storage
 }
 
 func (app *application) mount() http.Handler {
